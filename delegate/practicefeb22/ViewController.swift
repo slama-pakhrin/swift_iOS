@@ -17,8 +17,8 @@ class ViewController: UIViewController, HeartRateMonitorControllerDelegate {
     }
     
     @IBAction func buttontext(_ sender: Any) {
-        heartRateMonitor.pointToCaller = self
-        heartRateMonitor.delegate = self
+        // heartRateMonitor.pointToCaller = self
+        heartRateMonitor.delegate = self // delegate is of type viewcontroller. Assigning self gives it the authority of use methods inside this function
         heartRateMonitor.startMonitoring()
         labeltext.text = "\(heartRateMonitor.gBpm)"
     }
@@ -39,9 +39,10 @@ protocol HeartRateMonitorControllerDelegate{
 
 class HeartRateMonitorController{
     var gBpm = 0
-    var delegate: ViewController?
-    var pointToCaller : ViewController?
-    var name: String?
+    var delegate: ViewController? //this can also be the type of HeartRateMonitorControllerDelegate protocol, its the same thing
+    //delegate is why we could access the functions/properties of the class viewcontroller. 
+    // var pointToCaller : ViewController?
+    // var name: String?
     
     func startMonitoring(){
         for x in 1...(delegate?.numberOfCycles() ?? 100){
